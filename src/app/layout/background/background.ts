@@ -1,14 +1,18 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	ViewEncapsulation,
+} from '@angular/core'
 
 @Component({
-  selector: 'app-background',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  template: `
+	selector: 'app-background',
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	encapsulation: ViewEncapsulation.None,
+	template: `
     <div class="bg-layer bg-grid" aria-hidden="true"></div>
     <div class="bg-layer bg-dots" aria-hidden="true"></div>
   `,
-  styles: `
+	styles: `
     :host {
       position: fixed;
       inset: 0;
@@ -19,6 +23,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     .bg-layer {
       position: absolute;
       inset: 0;
+      pointer-events: none;
     }
   `,
 })
