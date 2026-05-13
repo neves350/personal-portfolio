@@ -1,0 +1,36 @@
+<div class="pointer-events-none fixed inset-y-0 left-1/2 z-0 hidden w-[min(calc(100vw-2.5rem),64rem)] -translate-x-1/2 border-x border-border/60 md:block"></div>
+
+<header class="pointer-events-none fixed inset-x-0 top-4 z-50">
+  <div class="content-width">
+    <div class="pointer-events-auto mx-auto flex w-full max-w-5xl items-center justify-between rounded-full border border-border bg-background-navbar px-2.5 py-1.5 backdrop-blur-md">
+      <a class="inline-flex items-center gap-2 rounded-full px-2.5 py-1.5 text-xs text-foreground">
+        <span class="font-heading text-xs uppercase tracking-[0.16em]">Martim Neves</span>
+      </a>
+
+      <div class="hidden items-center gap-0.5 md:flex">
+        <a class="rounded-full px-3 py-1.5 font-heading text-xs cursor-pointer uppercase tracking-[0.16em] text-muted-foreground transition hover:text-foreground">Projects</a>
+        <a class="rounded-full px-3 py-1.5 font-heading text-xs cursor-pointer uppercase tracking-[0.16em] text-muted-foreground transition hover:text-foreground">Contact</a>
+      </div>
+
+      <div class="flex items-center gap-1">
+        <z-button (click)="toggleTheme()" zType="ghost" class="cursor-pointer">
+          <svg [lucideIcon]="icon()" class="size-4"></svg>
+        </z-button>
+        <z-button (click)="openMenu()" zType="ghost" class="cursor-pointer md:hidden" aria-label="Open menu">
+          <svg lucideMenu class="size-4"></svg>
+        </z-button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<ng-template #menuContent>
+  <nav class="flex flex-col gap-2">
+    <a class="rounded-md px-3 py-2 font-heading text-xs uppercase tracking-[0.16em] text-foreground bg-links-sheet transition hover:bg-accent hover:text-foreground cursor-pointer border border-border">
+      Projects
+    </a>
+    <a class="rounded-md px-3 py-2 font-heading text-xs uppercase tracking-[0.16em] text-foreground bg-links-sheet transition hover:bg-accent hover:text-foreground cursor-pointer border border-border">
+      Contact
+    </a>
+  </nav>
+</ng-template>
