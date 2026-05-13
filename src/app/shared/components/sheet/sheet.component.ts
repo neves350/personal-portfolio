@@ -19,8 +19,8 @@ import {
 	signal,
 	type TemplateRef,
 	type Type,
-	viewChild,
 	type ViewContainerRef,
+	viewChild,
 } from '@angular/core'
 
 import { NgIcon, provideIcons } from '@ng-icons/core'
@@ -66,8 +66,8 @@ export class ZardSheetOptions<T, U> {
         data-testid="z-close-header-button"
         z-button
         zType="ghost"
-        zSize="sm"
-        class="absolute top-1 right-1 cursor-pointer"
+        zSize="icon-sm"
+        class="absolute top-3 right-1 mr-2 cursor-pointer mt-4"
         (click)="onCloseClick()"
       >
         <ng-icon name="lucideX" />
@@ -75,9 +75,9 @@ export class ZardSheetOptions<T, U> {
     }
 
     @if (config.zTitle || config.zDescription) {
-      <header data-slot="sheet-header" class="flex flex-col gap-1.5 p-4">
+      <header data-slot="sheet-header" class="flex flex-col gap-1.5 mt-4">
         @if (config.zTitle) {
-          <h4 data-testid="z-title" data-slot="sheet-title" class="text-lg leading-none font-semibold tracking-tight">
+          <h4 data-testid="z-title" data-slot="sheet-title" class="text-lg font-heading text-foreground leading-none font-medium tracking-tight">
             {{ config.zTitle }}
           </h4>
 
@@ -99,7 +99,7 @@ export class ZardSheetOptions<T, U> {
     </main>
 
     @if (!config.zHideFooter) {
-      <footer data-slot="sheet-footer" class="mt-auto flex flex-col gap-2 p-4">
+      <footer data-slot="sheet-footer" class="mt-auto flex flex-col gap-2">
         @if (config.zOkText !== null) {
           <button
             type="button"

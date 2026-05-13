@@ -65,6 +65,7 @@ export class ZardSheetService {
 		if (isPlatformBrowser(this.platformId)) {
 			const overlayConfig = new OverlayConfig({
 				hasBackdrop: true,
+				backdropClass: 'z-sheet-backdrop',
 				positionStrategy: this.overlay.position().global(),
 			})
 
