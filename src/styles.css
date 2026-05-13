@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap');
+
 @layer ng-icon, theme, base, components, utilities;
 @import 'tailwindcss';
 @plugin "tailwindcss-animate";
@@ -6,10 +8,13 @@
 
 
 :root {
+   --heading: 'Geist Mono', sans-serif;
+   --font-body: 'Geist', sans-serif;
+
   --radius: 0.625rem;
   --background: oklch(0.988 0.004 91.446);
-  --background-navbar: oklch(0.988 0.004 91.446);
-  --foreground: oklch(0.48 0.012 252.902);
+  --background-navbar: oklch(0.988 0.004 91.446 / 0.8);
+  --foreground: oklch(0.229 0.013 258.371);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.141 0.005 285.823);
   --popover: oklch(1 0 0);
@@ -39,12 +44,15 @@
   --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
   --sidebar-border: oklch(0.92 0.004 286.32);
   --sidebar-ring: oklch(0.705 0.015 286.067);
+  --bg-blur: oklch(0.13 0.043 265.132 / 0.12);
+  --bg-sheet: oklch(0.991 0.003 84.559);
+  --bg-links-sheet: oklch(0.988 0.004 91.446 / 0.3);
 }
 
 .dark {
   --background: oklch(0.144 0.002 106.671);
-  --background-navbar: oklch(0.144 0.002 106.671);
-  --foreground: oklch(0.699 0.003 84.563);
+  --background-navbar: oklch(0.144 0.002 106.671 / 0.8);
+  --foreground: oklch(0.91 0.003 84.56);
   --card: oklch(0.21 0.006 285.885);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.21 0.006 285.885);
@@ -74,10 +82,16 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.552 0.016 285.938);
+  --bg-blur: oklch(0.13 0.043 265.132 / 0.4);
+  --bg-sheet: oklch(0.191 0.002 106.586);
+  --bg-links-sheet: oklch(0.144 0.002 106.671 / 0.3);
 }
 
 
 @theme inline {
+  --font-sans: var(--font-body);
+  --font-heading: var(--heading);
+  --font-title: var(--title);
   --color-background: var(--background);
   --color-background-navbar: var(--background-navbar);
   --color-foreground: var(--foreground);
@@ -115,6 +129,9 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-blur: var(--bg-blur);
+  --color-sheet: var(--bg-sheet);
+  --color-links-sheet: var(--bg-links-sheet);
 }
 
 
@@ -123,7 +140,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
   }
 
   input[type="number"]::-webkit-inner-spin-button,
@@ -138,6 +155,11 @@
   }
 }
 
+
+.z-sheet-backdrop {
+  background: var(--bg-blur);
+  backdrop-filter: blur(4px);
+}
 
 ::-webkit-scrollbar {
   width: 6px;
@@ -158,15 +180,15 @@
 @utility bg-dots {
   background-image: radial-gradient(
     circle,
-    color-mix(in oklch, var(--border) 50%, transparent) 1px,
+    color-mix(in oklch, var(--border) 20%, transparent) 1px,
     transparent 1px
   );
-  background-size: 24px 24px;
+  background-size: 20px 20px;
 }
 
 @utility bg-grid {
   background-image:
-    linear-gradient(color-mix(in oklch, var(--border) 30%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in oklch, var(--border) 30%, transparent) 1px, transparent 1px);
+    linear-gradient(color-mix(in oklch, var(--border) 20%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklch, var(--border) 20%, transparent) 1px, transparent 1px);
   background-size: 80px 80px;
 }
