@@ -8,15 +8,23 @@
       </a>
 
       <div class="hidden items-center gap-0.5 md:flex">
-        <a 
+        <a
           routerLink="/projects"
-          class="rounded-full px-3 py-1.5 font-heading text-xs cursor-pointer uppercase tracking-[0.16em] text-muted-foreground transition hover:text-foreground"
+          routerLinkActive
+          #projectsLink="routerLinkActive"
+          [class]="projectsLink.isActive
+            ? 'rounded-full px-3 py-1.5 font-heading text-[0.72rem] uppercase tracking-[0.16em] transition hover:text-foreground bg-muted/55 text-foreground'
+            : 'rounded-full px-3 py-1.5 font-heading text-xs cursor-pointer uppercase tracking-[0.16em] text-muted-foreground transition hover:text-foreground'"
         >
           Projects
         </a>
-        <a 
+        <a
           routerLink="/contact"
-          class="rounded-full px-3 py-1.5 font-heading text-xs cursor-pointer uppercase tracking-[0.16em] text-muted-foreground transition hover:text-foreground"
+          routerLinkActive
+          #contactLink="routerLinkActive"
+          [class]="contactLink.isActive
+            ? 'rounded-full px-3 py-1.5 font-heading text-[0.72rem] uppercase tracking-[0.16em] transition hover:text-foreground bg-muted/55 text-foreground'
+            : 'rounded-full px-3 py-1.5 font-heading text-xs cursor-pointer uppercase tracking-[0.16em] text-muted-foreground transition hover:text-foreground'"
         >
           Contact
         </a>
@@ -36,10 +44,24 @@
 
 <ng-template #menuContent>
   <nav class="flex flex-col gap-2">
-    <a class="rounded-md px-3 py-2 font-heading text-xs uppercase tracking-[0.16em] text-foreground bg-links-sheet transition hover:bg-accent hover:text-foreground cursor-pointer border border-border">
+    <a
+      routerLink="/projects"
+      routerLinkActive
+      #mobileProjectsLink="routerLinkActive"
+      [class]="mobileProjectsLink.isActive
+        ? 'rounded-md px-3 py-2 font-heading text-xs uppercase tracking-[0.16em] text-foreground bg-muted/55 transition hover:bg-accent hover:text-foreground border border-border'
+        : 'rounded-md px-3 py-2 font-heading text-xs uppercase tracking-[0.16em] text-foreground bg-links-sheet transition hover:bg-accent hover:text-foreground cursor-pointer border border-border'"
+    >
       Projects
     </a>
-    <a class="rounded-md px-3 py-2 font-heading text-xs uppercase tracking-[0.16em] text-foreground bg-links-sheet transition hover:bg-accent hover:text-foreground cursor-pointer border border-border">
+    <a
+      routerLink="/contact"
+      routerLinkActive
+      #mobileContactLink="routerLinkActive"
+      [class]="mobileContactLink.isActive
+        ? 'rounded-md px-3 py-2 font-heading text-xs uppercase tracking-[0.16em] text-foreground bg-muted/55 transition hover:bg-accent hover:text-foreground border border-border'
+        : 'rounded-md px-3 py-2 font-heading text-xs uppercase tracking-[0.16em] text-foreground bg-links-sheet transition hover:bg-accent hover:text-foreground cursor-pointer border border-border'"
+    >
       Contact
     </a>
   </nav>

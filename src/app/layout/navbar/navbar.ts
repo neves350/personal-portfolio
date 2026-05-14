@@ -8,7 +8,7 @@ import {
 	ViewContainerRef,
 	viewChild,
 } from '@angular/core'
-import { RouterLink } from '@angular/router'
+import { RouterLink, RouterLinkActive } from '@angular/router'
 import {
 	LucideDynamicIcon,
 	LucideMenu,
@@ -21,7 +21,7 @@ import { ZardDarkMode } from '@/shared/services'
 
 @Component({
 	selector: 'app-navbar',
-	imports: [LucideDynamicIcon, LucideMenu, ZardButtonComponent, RouterLink],
+	imports: [LucideDynamicIcon, LucideMenu, ZardButtonComponent, RouterLink, RouterLinkActive],
 	templateUrl: './navbar.html',
 	styleUrl: './navbar.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
