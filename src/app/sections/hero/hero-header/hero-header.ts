@@ -5,5 +5,8 @@ import { LucideCode, LucideMapPin } from '@lucide/angular'
 	selector: 'app-hero-header',
 	imports: [LucideMapPin, LucideCode],
 	templateUrl: './hero-header.html',
+	host: {
+		class: 'block space-y-4',
+	},
 })
 export class HeroHeader {}
