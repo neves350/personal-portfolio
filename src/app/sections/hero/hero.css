@@ -1,0 +1,25 @@
+.content-width {
+	width: 100%;
+	max-width: var(--container-5xl); /* 1024px in Tailwind v4 */
+	padding-inline: calc(var(--spacing) * 5); /* 20px */
+	margin-inline: auto;
+}
+
+@media (min-width: 40rem) {
+	.content-width {
+		padding-inline: calc(var(--spacing) * 8); /* 32px */
+	}
+}
+
+.section-anchor {
+	scroll-margin-top: 6rem;
+}
+
+.paper-dots {
+	background-image: radial-gradient(
+		circle,
+		var(--texture-dot) 1px,
+		transparent 1.35px
+	);
+	background-size: 14px 14px;
+}
