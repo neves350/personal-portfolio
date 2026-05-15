@@ -1,0 +1,58 @@
+<div class="content-width">
+  <div class="max-w-2xl space-y-4">
+    <div class="space-y-3">
+      <h2 class="font-heading text-3xl font-medium tracking-tighter text-foreground sm:text-[2.2rem]">Work Experience</h2>
+      <p class="max-w-2xl text-[0.98rem] leading-8 text-muted-foreground sm:text-[1.02rem]">Frontend, Database and Hardware repairs</p>
+    </div>
+  </div>
+
+  <div class="mt-10">
+    <div class="space-y-8">
+      @for (exp of workExperiences; track exp.company) {
+        <article class="grid gap-4 border-t border-border/60 pt-6 md:grid-cols-[150px_minmax(0,1fr)]">
+          <div class="space-y-2 md:pt-1">
+            <p class="font-heading text-xs font-medium tracking-wider text-muted-foreground uppercase">{{ exp.dateRange }}</p>
+            <p class="text-sm text-muted-foreground">{{ exp.location }}</p>
+          </div>
+
+          <div class="space-y-4 border-l border-border/50 pl-5">
+            <div class="grid gap-3 lg:grid-cols-[minmax(0,1fr)_180px]">
+              <div class="space-y-2">
+                <h3 class="font-heading text-[1.45rem] font-medium tracking-[-0.04em] text-foreground">{{ exp.role }}</h3>
+                <p class="font-heading text-sm font-medium tracking-wider text-muted-foreground uppercase">
+                  <span>{{ exp.company }}</span>
+                </p>
+                <p class="text-sm leading-7 text-muted-foreground">
+                  {{ exp.description }}
+                </p>
+              </div>
+              @if (exp.companyUrl) {
+                <div class="text-sm text-muted-foreground">
+                  <a
+                    [href]="exp.companyUrl"
+                    target="_blank"
+                    class="inline-flex items-center gap-1.5 text-sm text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground/60"
+                  >
+                    <span>Company site</span>
+                    <svg lucideArrowUpRight class="size-4"></svg>
+                  </a>
+                </div>
+              }
+            </div>
+
+            @if (exp.bullets.length) {
+              <ul class="grid gap-3 text-sm leading-7 text-muted-foreground sm:grid-cols-2">
+                @for (bullet of exp.bullets; track bullet) {
+                  <li class="flex items-start gap-2">
+                    <svg lucideMinus class="mt-2 shrink-0 size-3"></svg>
+                    <span>{{ bullet }}</span>
+                  </li>
+                }
+              </ul>
+            }
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</div>
