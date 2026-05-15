@@ -183,15 +183,15 @@
 @utility bg-dots {
   background-image: radial-gradient(
     circle,
-    color-mix(in oklch, var(--border) 20%, transparent) 1px,
+    color-mix(in oklch, var(--border) 15%, transparent) 1px,
     transparent 1px
   );
-  background-size: 20px 20px;
+  background-size: 15px 15px;
 }
 
 @utility bg-grid {
   background-image:
     linear-gradient(color-mix(in oklch, var(--border) 20%, transparent) 1px, transparent 1px),
     linear-gradient(90deg, color-mix(in oklch, var(--border) 20%, transparent) 1px, transparent 1px);
-  background-size: 80px 80px;
+  background-size: 50px 50px;
 }
