@@ -14,7 +14,7 @@ import {
   `,
 	styles: `
     :host {
-      position: fixed;
+      position: absolute;
       inset: 0;
       z-index: -1;
       pointer-events: none;
