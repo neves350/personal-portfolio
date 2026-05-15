@@ -12,6 +12,7 @@ export interface Project {
 	tags: string[]
 	stack: string[]
 	links: ProjectLink[]
+	featured?: boolean
 }
 
 export const PROJECTS: Project[] = [
@@ -40,6 +41,7 @@ export const PROJECTS: Project[] = [
 				href: 'https://github.com/neves350/personal-finance-manager',
 			},
 		],
+		featured: true,
 	},
 	{
 		image: { src: 'project-03.png', alt: 'No image screenshot' },
@@ -50,6 +52,7 @@ export const PROJECTS: Project[] = [
 		tags: ['Angular', 'NestJS', 'FullStack', 'Personal project'],
 		stack: ['Angular', 'TypeScript', 'NestJS', 'PostgreSQL', 'Supabase'],
 		links: [],
+		featured: true,
 	},
 	{
 		image: { src: 'project-03.png', alt: 'No image screenshot' },
