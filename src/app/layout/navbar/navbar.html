@@ -31,7 +31,7 @@
       </div>
 
       <div class="flex items-center gap-1">
-        <z-button (click)="toggleTheme()" zType="ghost" class="cursor-pointer">
+        <z-button (click)="toggleTheme($event)" zType="ghost" class="cursor-pointer">
           <svg [lucideIcon]="icon()" class="size-4"></svg>
         </z-button>
         <z-button (click)="openMenu()" zType="ghost" class="cursor-pointer md:hidden" aria-label="Open menu">
