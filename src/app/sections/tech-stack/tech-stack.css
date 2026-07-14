@@ -18,3 +18,10 @@
 .section-anchor {
 	scroll-margin-top: 6rem;
 }
+
+.stack-icon {
+	mask-size: contain;
+	mask-repeat: no-repeat;
+	-webkit-mask-size: contain;
+	-webkit-mask-repeat: no-repeat;
+}

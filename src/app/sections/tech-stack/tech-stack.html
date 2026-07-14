@@ -12,57 +12,28 @@
 
   <div class="mt-10">
     <div class="grid gap-8 md:grid-cols-2">
-      <section class="border-t border-border/60 pt-5">
-        <p class="font-heading text-xs font-medium tracking-wider text-muted-foreground uppercase">Languages</p>
+      @for (category of categories; track category.title) {
+        <section class="border-t border-border/60 pt-5">
+          <p class="font-heading text-xs font-medium tracking-wider text-muted-foreground uppercase">
+            {{ category.title }}
+          </p>
 
-        <div class="mt-4 flex flex-wrap gap-2">
-          <span [class]="tagClass">TypeScript</span>
-          <span [class]="tagClass">JavaScript</span>
-          <span [class]="tagClass">HTML</span>
-          <span [class]="tagClass">CSS</span>
-        </div>
-      </section>
-
-      <section class="border-t border-border/60 pt-5">
-        <p class="font-heading text-xs font-medium tracking-wider text-muted-foreground uppercase">Frontend</p>
-
-        <div class="mt-4 flex flex-wrap gap-2">
-          <span [class]="tagClass">Angular</span>
-          <span [class]="tagClass">React</span>
-          <span [class]="tagClass">Ionic</span>
-          <span [class]="tagClass">Tailwind CSS</span>
-        </div>
-      </section>
-
-      <section class="border-t border-border/60 pt-5">
-        <p class="font-heading text-xs font-medium tracking-wider text-muted-foreground uppercase">Backend</p>
-
-        <div class="mt-4 flex flex-wrap gap-2">
-          <span [class]="tagClass">REST</span>
-          <span [class]="tagClass">NestJS</span>
-          <span [class]="tagClass">PostgreSQL</span>
-          <span [class]="tagClass">Prisma ORM</span>
-        </div>
-      </section>
-
-      <section class="border-t border-border/60 pt-5">
-        <p class="font-heading text-xs font-medium tracking-wider text-muted-foreground uppercase">Testing</p>
-
-        <div class="mt-4 flex flex-wrap gap-2">
-          <span [class]="tagClass">Vitest</span>
-          <span [class]="tagClass">Jest</span>
-        </div>
-      </section>
-
-      <section class="border-t border-border/60 pt-5">
-        <p class="font-heading text-xs font-medium tracking-wider text-muted-foreground uppercase">Tools</p>
-
-        <div class="mt-4 flex flex-wrap gap-2">
-          <span [class]="tagClass">Git</span>
-          <span [class]="tagClass">GitHub</span>
-          <span [class]="tagClass">Figma</span>
-        </div>
-      </section>
+          <div class="mt-4 flex flex-wrap gap-2">
+            @for (item of category.items; track item.name) {
+              <span [class]="tagClass">
+                <span
+                  class="stack-icon inline-block size-3.5 shrink-0 bg-current"
+                  [style.-webkit-mask-image]="'url(' + item.icon + ')'"
+                  [style.mask-image]="'url(' + item.icon + ')'"
+                  role="img"
+                  [attr.aria-label]="item.name"
+                ></span>
+                {{ item.name }}
+              </span>
+            }
+          </div>
+        </section>
+      }
     </div>
   </div>
 </div>
