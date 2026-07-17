@@ -1,4 +1,4 @@
-import { clampLevel, type ContributionDay, parseContributionsResponse, selectTrailingYear } from './github-activity.data'
+import { clampLevel, type ContributionDay, groupIntoWeeks, parseContributionsResponse, selectTrailingYear } from './github-activity.data'
 
 describe('clampLevel', () => {
   it('passes through valid levels unchanged', () => {
@@ -69,5 +69,71 @@ describe('selectTrailingYear', () => {
     const asOfJan = new Date('2026-01-10')
     const days = [day('2025-12-31', 1), day('2025-01-10', 1)]
     expect(selectTrailingYear(days, asOfJan)).toEqual([day('2025-12-31', 1)])
+  })
+})
+
+describe('groupIntoWeeks', () => {
+  it('returns an empty array for empty input', () => {
+    expect(groupIntoWeeks([])).toEqual([])
+  })
+
+  it('left-pads the first week to align on day-of-week', () => {
+    const days = [day('2026-01-01', 1), day('2026-01-02', 1), day('2026-01-03', 1)]
+    const weeks = groupIntoWeeks(days)
+    expect(weeks).toHaveLength(1)
+    expect(weeks[0].days).toEqual([null, null, null, null, days[0], days[1], days[2]])
+  })
+
+  it('right-pads the last week to fill out the row', () => {
+    const days = [
+      day('2026-01-04', 1),
+      day('2026-01-05', 1),
+      day('2026-01-06', 1),
+      day('2026-01-07', 1),
+    ]
+    const weeks = groupIntoWeeks(days)
+    expect(weeks).toHaveLength(1)
+    expect(weeks[0].days).toEqual([days[0], days[1], days[2], days[3], null, null, null])
+  })
+
+  it('does not pad when input is already Sunday-to-Saturday aligned', () => {
+    const days = [
+      day('2026-01-04', 1),
+      day('2026-01-05', 1),
+      day('2026-01-06', 1),
+      day('2026-01-07', 1),
+      day('2026-01-08', 1),
+      day('2026-01-09', 1),
+      day('2026-01-10', 1),
+    ]
+    const weeks = groupIntoWeeks(days)
+    expect(weeks).toHaveLength(1)
+    expect(weeks[0].days).toEqual(days)
+  })
+
+  it('gives every week exactly 7 slots', () => {
+    const days = [day('2026-01-01', 1), day('2026-01-02', 1), day('2026-01-03', 1)]
+    const weeks = groupIntoWeeks(days)
+    for (const week of weeks) {
+      expect(week.days).toHaveLength(7)
+    }
+  })
+
+  it('preserves every input day as a non-null slot somewhere in the output', () => {
+    const days = [day('2026-01-01', 1), day('2026-01-02', 1), day('2026-01-03', 1)]
+    const weeks = groupIntoWeeks(days)
+    const nonNullCount = weeks.flatMap((w: typeof weeks[0]) => w.days).filter((d: ContributionDay | null): d is ContributionDay => d !== null).length
+    expect(nonNullCount).toBe(days.length)
+  })
+
+  it('sorts out-of-order input before grouping', () => {
+    const days = [
+      day('2026-01-04', 1),
+      day('2026-01-05', 1),
+      day('2026-01-06', 1),
+      day('2026-01-07', 1),
+    ]
+    const shuffled = [days[3], days[0], days[2], days[1]]
+    expect(groupIntoWeeks(shuffled)).toEqual(groupIntoWeeks(days))
   })
 })

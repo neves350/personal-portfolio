@@ -73,3 +73,25 @@ function addUtcDays(date: Date, days: number): Date {
 function pad(value: number): string {
   return value.toString().padStart(2, '0')
 }
+
+export function groupIntoWeeks(contributions: readonly ContributionDay[]): ContributionWeek[] {
+  if (contributions.length === 0) return []
+
+  const sorted = [...contributions].sort((a, b) => a.date.localeCompare(b.date))
+  const firstDayOfWeek = parseUtcDate(sorted[0].date).getUTCDay()
+  const lastDayOfWeek = parseUtcDate(sorted[sorted.length - 1].date).getUTCDay()
+
+  const leadingPadding: null[] = Array.from({ length: firstDayOfWeek }, () => null)
+  const trailingPadding: null[] = Array.from({ length: 6 - lastDayOfWeek }, () => null)
+  const padded: (ContributionDay | null)[] = [...leadingPadding, ...sorted, ...trailingPadding]
+
+  const weeks: ContributionWeek[] = []
+  for (let i = 0; i < padded.length; i += 7) {
+    weeks.push({ days: padded.slice(i, i + 7) })
+  }
+  return weeks
+}
+
+function parseUtcDate(date: string): Date {
+  return new Date(`${date}T00:00:00Z`)
+}
