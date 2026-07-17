@@ -161,7 +161,21 @@ describe('formatDayAriaLabel', () => {
     expect(formatDayAriaLabel(day('2026-07-17', 0))).toBe('No contributions on July 17, 2026')
   })
 
-  it('formats the UTC calendar date regardless of the local test-runner timezone', () => {
-    expect(formatDayAriaLabel(day('2026-01-01', 1))).toBe('1 contribution on January 1, 2026')
+  it('formats the UTC calendar date regardless of the local test-runner timezone', async () => {
+    // No @types/node is installed in this project, so `process` is accessed via a typed
+    // globalThis cast rather than the (untyped) bare identifier.
+    const nodeProcess = (
+      globalThis as unknown as { process: { env: Record<string, string | undefined> } }
+    ).process
+    const originalTz = nodeProcess.env['TZ']
+    nodeProcess.env['TZ'] = 'America/Los_Angeles'
+    vi.resetModules()
+    try {
+      const fresh = await import('./github-activity.data')
+      expect(fresh.formatDayAriaLabel(day('2026-01-01', 1))).toBe('1 contribution on January 1, 2026')
+    } finally {
+      nodeProcess.env['TZ'] = originalTz
+      vi.resetModules()
+    }
   })
 })
