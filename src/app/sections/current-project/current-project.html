@@ -8,9 +8,9 @@
     </div>
   </div>
 
-  <div class="mt-10 grid grid-cols-1 gap-y-8 md:grid-cols-2">
+  <div class="mt-10 grid grid-cols-1 gap-y-8 md:grid-cols-2 md:gap-y-0">
     @for (project of projects; track project.title; let i = $index) {
-      <article class="group flex flex-col border-b border-dashed border-border/60 pb-8 last:border-b-0 md:border-b-0 md:odd:border-r md:odd:pr-8 md:even:pl-8">
+      <article class="group flex flex-col border-b border-dashed border-border/60 pb-8 last:border-b-0 md:border-b-0 md:odd:border-r md:odd:pr-8 md:even:pl-8 md:nth-[n+3]:border-t md:nth-[n+3]:border-dashed md:nth-[n+3]:border-border/60 md:nth-[n+3]:pt-8">
         <a
           class="relative flex h-48 overflow-hidden rounded-md bg-secondary sm:h-72"
           [href]="project.links[0]?.href"

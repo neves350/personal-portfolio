@@ -1,12 +1,12 @@
 import { NgOptimizedImage } from '@angular/common'
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { LucideArrowUpRight, LucideGlobe } from '@lucide/angular'
+import { LucideGlobe } from '@lucide/angular'
 import type { Project } from './projects.data'
 import { PROJECTS } from './projects.data'
 
 @Component({
 	selector: 'app-projects',
-	imports: [LucideArrowUpRight, LucideGlobe, NgOptimizedImage],
+	imports: [LucideGlobe, NgOptimizedImage],
 	templateUrl: './projects.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
