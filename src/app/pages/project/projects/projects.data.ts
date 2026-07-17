@@ -5,7 +5,7 @@ export interface ProjectLink {
 
 export interface Project {
 	image: { src: string; alt: string }
-	status: 'Active build' | 'Shipped' | 'Completed'
+	status: 'Active build' | 'Live' | 'Completed'
 	dateRange: string
 	title: string
 	description: string
@@ -21,12 +21,12 @@ export const PROJECTS: Project[] = [
 			src: 'project-01.png',
 			alt: 'Personal Finance Manager screenshot',
 		},
-		status: 'Active build',
-		dateRange: 'Dec 2025 - Present',
-		title: 'Personal Finance Management',
+		status: 'Live',
+		dateRange: 'January 2026 - Present',
+		title: 'Trocos',
 		description:
 			'A tracking personal and business expenses, managing budgets, and generating financial reports',
-		tags: ['Angular', 'NestJS', 'FullStack', 'Personal project'],
+		tags: ['Angular', 'NestJS', 'TypeScript', 'Personal project'],
 		stack: [
 			'Angular',
 			'TypeScript',
@@ -37,8 +37,12 @@ export const PROJECTS: Project[] = [
 		],
 		links: [
 			{
+				label: 'Website',
+				href: 'https://trocos.vercel.app/',
+			},
+			{
 				label: 'GitHub',
-				href: 'https://github.com/neves350/personal-finance-manager',
+				href: 'https://github.com/neves350/trocos',
 			},
 		],
 		featured: true,
@@ -46,12 +50,26 @@ export const PROJECTS: Project[] = [
 	{
 		image: { src: 'project-03.png', alt: 'No image screenshot' },
 		status: 'Active build',
-		dateRange: 'May 2026 - Present',
-		title: 'Personal Barbershop Website',
-		description: '...',
-		tags: ['Angular', 'NestJS', 'FullStack', 'Personal project'],
-		stack: ['Angular', 'TypeScript', 'NestJS', 'PostgreSQL', 'Supabase'],
-		links: [],
+		dateRange: 'July 2026 - Present',
+		title: 'Bora',
+		description:
+			'Focus timer and study analytics - sessions, streaks, and subject-level progress tracking.',
+		tags: ['Angular', 'NestJS', 'TypeScript', 'Personal project'],
+		stack: [
+			'Angular',
+			'TypeScript',
+			'NestJS',
+			'Prisma ORM',
+			'PostgreSQL',
+			'Neon Console',
+			'Docker',
+		],
+		links: [
+			{
+				label: 'GitHub',
+				href: 'https://github.com/neves350/bora-tracker',
+			},
+		],
 		featured: true,
 	},
 	{
@@ -61,7 +79,7 @@ export const PROJECTS: Project[] = [
 		title: 'Sky Syllabus',
 		description:
 			'Web application for aviation pilot students, with practice modes, school exams.',
-		tags: ['Frontend', 'Academic project'],
+		tags: ['Angular', 'TypeScript', 'Academic project'],
 		stack: ['Angular', 'TypeScript', 'Ionic Framework'],
 		links: [],
 	},
