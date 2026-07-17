@@ -95,3 +95,21 @@ export function groupIntoWeeks(contributions: readonly ContributionDay[]): Contr
 function parseUtcDate(date: string): Date {
   return new Date(`${date}T00:00:00Z`)
 }
+
+export function sumContributions(contributions: readonly ContributionDay[]): number {
+  return contributions.reduce((total, day) => total + day.count, 0)
+}
+
+const ARIA_LABEL_DATE_FORMAT = new Intl.DateTimeFormat('en-US', {
+  timeZone: 'UTC',
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+})
+
+export function formatDayAriaLabel(day: ContributionDay): string {
+  const formattedDate = ARIA_LABEL_DATE_FORMAT.format(parseUtcDate(day.date))
+  if (day.count === 0) return `No contributions on ${formattedDate}`
+  if (day.count === 1) return `1 contribution on ${formattedDate}`
+  return `${day.count} contributions on ${formattedDate}`
+}

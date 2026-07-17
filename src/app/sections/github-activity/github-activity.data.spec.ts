@@ -1,4 +1,4 @@
-import { clampLevel, type ContributionDay, groupIntoWeeks, parseContributionsResponse, selectTrailingYear } from './github-activity.data'
+import { clampLevel, type ContributionDay, formatDayAriaLabel, groupIntoWeeks, parseContributionsResponse, selectTrailingYear, sumContributions } from './github-activity.data'
 
 describe('clampLevel', () => {
   it('passes through valid levels unchanged', () => {
@@ -135,5 +135,33 @@ describe('groupIntoWeeks', () => {
     ]
     const shuffled = [days[3], days[0], days[2], days[1]]
     expect(groupIntoWeeks(shuffled)).toEqual(groupIntoWeeks(days))
+  })
+})
+
+describe('sumContributions', () => {
+  it('sums the count field across all days', () => {
+    expect(sumContributions([day('2026-01-01', 2), day('2026-01-02', 3)])).toBe(5)
+  })
+
+  it('returns 0 for an empty array', () => {
+    expect(sumContributions([])).toBe(0)
+  })
+})
+
+describe('formatDayAriaLabel', () => {
+  it('uses singular wording for exactly 1 contribution', () => {
+    expect(formatDayAriaLabel(day('2026-07-17', 1))).toBe('1 contribution on July 17, 2026')
+  })
+
+  it('uses plural wording for more than 1 contribution', () => {
+    expect(formatDayAriaLabel(day('2026-07-17', 5))).toBe('5 contributions on July 17, 2026')
+  })
+
+  it('reports "No contributions" for a zero-count day', () => {
+    expect(formatDayAriaLabel(day('2026-07-17', 0))).toBe('No contributions on July 17, 2026')
+  })
+
+  it('formats the UTC calendar date regardless of the local test-runner timezone', () => {
+    expect(formatDayAriaLabel(day('2026-01-01', 1))).toBe('1 contribution on January 1, 2026')
   })
 })
