@@ -50,3 +50,26 @@ export function parseContributionsResponse(value: unknown): ContributionsApiResp
     })),
   }
 }
+
+export function selectTrailingYear(
+  contributions: readonly ContributionDay[],
+  asOf: Date = new Date(),
+): ContributionDay[] {
+  const end = formatUtcDate(asOf)
+  const start = formatUtcDate(addUtcDays(asOf, -364))
+  return contributions.filter((day) => day.date >= start && day.date <= end)
+}
+
+function formatUtcDate(date: Date): string {
+  return `${date.getUTCFullYear()}-${pad(date.getUTCMonth() + 1)}-${pad(date.getUTCDate())}`
+}
+
+function addUtcDays(date: Date, days: number): Date {
+  const result = new Date(date)
+  result.setUTCDate(result.getUTCDate() + days)
+  return result
+}
+
+function pad(value: number): string {
+  return value.toString().padStart(2, '0')
+}

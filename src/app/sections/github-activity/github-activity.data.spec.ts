@@ -1,4 +1,4 @@
-import { clampLevel, parseContributionsResponse } from './github-activity.data'
+import { clampLevel, type ContributionDay, parseContributionsResponse, selectTrailingYear } from './github-activity.data'
 
 describe('clampLevel', () => {
   it('passes through valid levels unchanged', () => {
@@ -40,5 +40,34 @@ describe('parseContributionsResponse', () => {
     expect(() =>
       parseContributionsResponse({ contributions: [{ date: '2026-01-01', count: 3 }] }),
     ).toThrow()
+  })
+})
+
+function day(date: string, count: number): ContributionDay {
+  return { date, count, level: clampLevel(count) }
+}
+
+describe('selectTrailingYear', () => {
+  const asOf = new Date('2026-07-17')
+
+  it('drops days older than 365 days before asOf', () => {
+    const days = [day('2025-07-17', 1)]
+    expect(selectTrailingYear(days, asOf)).toEqual([])
+  })
+
+  it('drops days after asOf', () => {
+    const days = [day('2026-07-18', 1)]
+    expect(selectTrailingYear(days, asOf)).toEqual([])
+  })
+
+  it('keeps the trailing-365-day boundary inclusive on both ends', () => {
+    const days = [day('2025-07-18', 1), day('2026-07-17', 2)]
+    expect(selectTrailingYear(days, asOf)).toEqual(days)
+  })
+
+  it('spans a real year boundary correctly', () => {
+    const asOfJan = new Date('2026-01-10')
+    const days = [day('2025-12-31', 1), day('2025-01-10', 1)]
+    expect(selectTrailingYear(days, asOfJan)).toEqual([day('2025-12-31', 1)])
   })
 })
