@@ -169,12 +169,19 @@ describe('formatDayAriaLabel', () => {
     ).process
     const originalTz = nodeProcess.env['TZ']
     nodeProcess.env['TZ'] = 'America/Los_Angeles'
+    // ARIA_LABEL_DATE_FORMAT is a module-level Intl.DateTimeFormat singleton built once at
+    // import time, so mutating TZ alone wouldn't reconstruct it — reset the module registry
+    // and re-import fresh so the singleton is rebuilt under the overridden TZ.
     vi.resetModules()
     try {
       const fresh = await import('./github-activity.data')
       expect(fresh.formatDayAriaLabel(day('2026-01-01', 1))).toBe('1 contribution on January 1, 2026')
     } finally {
-      nodeProcess.env['TZ'] = originalTz
+      if (originalTz === undefined) {
+        delete nodeProcess.env['TZ']
+      } else {
+        nodeProcess.env['TZ'] = originalTz
+      }
       vi.resetModules()
     }
   })
