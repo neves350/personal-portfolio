@@ -136,6 +136,25 @@ describe('groupIntoWeeks', () => {
     const shuffled = [days[3], days[0], days[2], days[1]]
     expect(groupIntoWeeks(shuffled)).toEqual(groupIntoWeeks(days))
   })
+
+  it('produces multiple weeks and places each day in the correct week and column when input spans more than 7 days', () => {
+    const days = [
+      day('2026-01-01', 1),
+      day('2026-01-02', 1),
+      day('2026-01-03', 1),
+      day('2026-01-04', 1),
+      day('2026-01-05', 1),
+      day('2026-01-06', 1),
+      day('2026-01-07', 1),
+      day('2026-01-08', 1),
+      day('2026-01-09', 1),
+      day('2026-01-10', 1),
+    ]
+    const weeks = groupIntoWeeks(days)
+    expect(weeks).toHaveLength(2)
+    expect(weeks[0].days).toEqual([null, null, null, null, days[0], days[1], days[2]])
+    expect(weeks[1].days).toEqual([days[3], days[4], days[5], days[6], days[7], days[8], days[9]])
+  })
 })
 
 describe('sumContributions', () => {

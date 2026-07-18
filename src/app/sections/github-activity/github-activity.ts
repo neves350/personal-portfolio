@@ -34,6 +34,10 @@ export class GithubActivity {
   protected readonly totalContributions = computed(() =>
     sumContributions(this.trailingContributions()),
   )
+  protected readonly contributionsSummary = computed(() => {
+    const total = this.totalContributions()
+    return total === 1 ? '1 contribution in the last year' : `${total} contributions in the last year`
+  })
   protected readonly formatDayAriaLabel = formatDayAriaLabel
 
   protected readonly levelClass: Record<ContributionLevel, string> = {
