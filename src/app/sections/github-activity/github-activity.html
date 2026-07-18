@@ -1,12 +1,68 @@
-<div class="content-width">
-  <div class="max-w-2xl space-y-4">
-    <div class="space-y-3">
-      <h2 class="font-heading text-3xl font-medium tracking-tighter text-foreground sm:text-[2.2rem]">
-        GitHub activity
-      </h2>
-      <p class="max-w-2xl text-[0.98rem] leading-8 text-muted-foreground sm:text-[1.02rem]">
-        Loading contribution graph…
-      </p>
+@if (!hasError()) {
+  <div class="content-width">
+    <div class="max-w-2xl space-y-4">
+      <div class="space-y-3">
+        <h2 class="font-heading text-3xl font-medium tracking-tighter text-foreground sm:text-[2.2rem]">
+          GitHub activity
+        </h2>
+        <p class="max-w-2xl text-[0.98rem] leading-8 text-muted-foreground sm:text-[1.02rem]">
+          @if (!isLoading()) {
+            {{ totalContributions() }} contributions in the last year
+          } @else {
+            Loading contribution graph…
+          }
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-8 overflow-x-auto">
+      @if (isLoading()) {
+        <div class="flex w-max gap-1" aria-hidden="true">
+          @for (week of skeletonWeeks; track $index) {
+            <div class="flex flex-col gap-1">
+              @for (day of skeletonDays; track $index) {
+                <div class="size-3 animate-pulse rounded-sm bg-muted"></div>
+              }
+            </div>
+          }
+        </div>
+      } @else {
+        <div class="flex w-max gap-1">
+          @for (week of weeks(); track $index) {
+            <div class="flex flex-col gap-1">
+              @for (day of week.days; track day?.date ?? $index) {
+                @if (day) {
+                  <button
+                    type="button"
+                    class="group relative size-3 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    [class]="levelClass[day.level]"
+                    [attr.aria-label]="formatDayAriaLabel(day)"
+                    [attr.aria-describedby]="'gh-activity-tooltip-' + day.date"
+                  >
+                    <span
+                      [id]="'gh-activity-tooltip-' + day.date"
+                      role="tooltip"
+                      class="pointer-events-none absolute bottom-full left-1/2 z-10 mb-1.5 -translate-x-1/2 rounded-md bg-popover px-2 py-1 text-xs whitespace-nowrap text-popover-foreground opacity-0 shadow-md transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+                    >
+                      {{ formatDayAriaLabel(day) }}
+                    </span>
+                  </button>
+                } @else {
+                  <div class="size-3" aria-hidden="true"></div>
+                }
+              }
+            </div>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">
+      <span>Less</span>
+      @for (level of legendLevels; track level) {
+        <span class="size-3 rounded-sm" [class]="levelClass[level]" aria-hidden="true"></span>
+      }
+      <span>More</span>
     </div>
   </div>
-</div>
+}
