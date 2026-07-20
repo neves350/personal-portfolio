@@ -51,9 +51,8 @@ export const PROJECTS: Project[] = [
 		image: { src: 'project-03.png', alt: 'No image screenshot' },
 		status: 'Active build',
 		dateRange: 'July 2026 - Present',
-		title: 'Bora',
-		description:
-			'Focus timer and study analytics - sessions, streaks, and subject-level progress tracking.',
+		title: 'Aqui Perto',
+		description: `Real-time public transit app for Lisbon's metro area - nearby stops, trip planning, and live bus tracking.`,
 		tags: ['Angular', 'NestJS', 'TypeScript', 'Personal project'],
 		stack: [
 			'Angular',
@@ -61,13 +60,13 @@ export const PROJECTS: Project[] = [
 			'NestJS',
 			'Prisma ORM',
 			'PostgreSQL',
+			'Websockets',
 			'Neon Console',
-			'Docker',
 		],
 		links: [
 			{
 				label: 'GitHub',
-				href: 'https://github.com/neves350/bora-tracker',
+				href: 'https://github.com/neves350/aqui-perto',
 			},
 		],
 		featured: true,
